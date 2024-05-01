@@ -1,0 +1,22 @@
+{
+  "name": "simplestblog",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Create a blog by editing markdown files",
+  "main": "index.js",
+  "scripts": {
+    "generate": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com:eobrain/simplestblog.git"
+  },
+  "author": "Eamonn O'Brien-Strain",
+  "license": "ISC",
+  "dependencies": {
+    "glob": "^10.3.12",
+    "mustache": "^4.2.0",
+    "showdown": "^2.1.0"
+  }
+}
