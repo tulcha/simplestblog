@@ -5,8 +5,10 @@
   "description": "Create a blog by editing markdown files",
   "main": "index.js",
   "scripts": {
-    "generate": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "node index.js",
+    "start": "cd _site && live-server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fix": "standard --fix --ignore layout/js/tex-svg-full.js --ignore layout/js/equation.js"
   },
   "repository": {
     "type": "git",
@@ -16,7 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "glob": "^10.3.12",
+    "live-server": "^1.1.0",
     "mustache": "^4.2.0",
+    "passprint": "^0.0.1",
     "showdown": "^2.1.0"
   }
 }

@@ -4,20 +4,20 @@ import showdown from 'showdown'
 import { mkdirIfNecessary } from './file.js'
 import Mustache from 'mustache'
 import { extractFrontMatter } from './frontmatter.js'
-// import { pp } from 'passprint'
+import { pp } from 'passprint'
 
 const converter = new showdown.Converter({ tables: true })
 
 // Read metadata
 const config = JSON.parse(await fs.readFile('content/config.json'))
 const pageMetadata = []
-for (const path of await glob('content/pages/*.md')) {
-  const { frontMatter } = extractFrontMatter(path)
-  pageMetadata.push(frontMatter)
+for (const path of pp(await glob('content/pages/*.md'))) {
+  const { frontMatter } = extractFrontMatter(await fs.readFile(path, 'utf8'))
+  pageMetadata.push(pp(frontMatter))
 }
 const postMetadata = []
-for (const path of await glob('content/posts/*.md')) {
-  const { frontMatter } = extractFrontMatter(path)
+for (const path of pp(await glob('content/posts/*.md'))) {
+  const { frontMatter } = extractFrontMatter(await fs.readFile(path, 'utf8'))
   postMetadata.push(frontMatter)
 }
 const draftMetadata = []
@@ -51,8 +51,8 @@ async function renderWrite (markdown, { slug, title, created, image }, template,
   await fs.writeFile(`${siteDir}/${slug}.html`, rendered)
 }
 
-async function readRenderWrite ({ slug, title, created, image }, template, prev, next) {
-  const markdown = await fs.readFile(`content/markdown/${slug}.md`, 'utf8')
+async function readRenderWrite (dir, { slug, title, created, image }, template, prev, next) {
+  const markdown = await fs.readFile(`content/${dir}/${slug}.md`, 'utf8')
   const descriptionMatch = markdown.match(/[A-Z].*\./)
   const description = descriptionMatch ? descriptionMatch[0] : title
   await renderWrite(markdown, { slug, title, created, image }, template, description, prev, next)
@@ -64,10 +64,11 @@ const homeTemplate = await fs.readFile('layout/home.html', 'utf8')
 
 // Convert markdown to HTML and write to site directory
 for (const { slug, title } of pageMetadata) {
-  await readRenderWrite({ slug, title }, pageTemplate, title)
+  pp(slug)
+  await readRenderWrite('pages', { slug, title }, pageTemplate, title)
 }
 for (let i = 0; i < postMetadata.length; i++) {
-  await readRenderWrite(postMetadata[i], postTemplate, postMetadata[i - 1], postMetadata[i + 1])
+  await readRenderWrite('posts', postMetadata[i], postTemplate, postMetadata[i - 1], postMetadata[i + 1])
 }
 
 // Generate home page
