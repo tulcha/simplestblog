@@ -4,8 +4,15 @@ Create a blog by editing markdown files.
 
 Simple instructions
 
-# Fork this repo
-# Edit the markdown files in `content/posts` and `content/pages`
-# Commit the files
-# Deploy
+1. Fork this repo
+2. 
+  ```sh
+  nvm use
+  npm install
+  ```
+3. Edit the markdown files in `content/posts` and `content/pages`
+4.
+  ```sh
+  npm start
+  ```
 
