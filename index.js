@@ -24,7 +24,7 @@ for (const path of pp(await glob('content/posts/*.md'))) {
 }
 const draftMetadata = []
 for (const path of await glob('content/drafts/*.md')) {
-  const { frontMatter } = extractFrontMatter(path)
+  const { frontMatter } = extractFrontMatter(await fs.readFile(path, 'utf8'))
   frontMatter.slug = pp(path.match(/^content\/drafts\/(.*)\.md$/))[1]
   draftMetadata.push(frontMatter)
 }
@@ -55,7 +55,7 @@ async function renderWrite (markdown, { slug, title, created, image }, template,
 }
 
 async function readRenderWrite (dir, { slug, title, created, image }, template, prev, next) {
-  const markdown = await fs.readFile(`content/${dir}/${slug}.md`, 'utf8')
+  const { markdown } = extractFrontMatter(await fs.readFile(`content/${dir}/${slug}.md`, 'utf8'))
   const descriptionMatch = markdown.match(/[A-Z].*\./)
   const description = descriptionMatch ? descriptionMatch[0] : title
   await renderWrite(markdown, { slug, title, created, image }, template, description, prev, next)

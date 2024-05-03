@@ -1,5 +1,5 @@
 {
-    "siteName": "Blog Name",
-    "siteDescription": "Description of the blog",
-    "host": "https://example.com/"
+    "siteName": "The Diary of Samuel Pepys",
+    "siteDescription": "Daily entries from the 17th century London diary",
+    "host": "https://www.pepysdiary.com/diary/"
   }
