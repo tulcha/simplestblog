@@ -1,7 +1,7 @@
-import { pp } from 'passprint'
+// import { pp } from 'passprint'
 
 export function extractFrontMatter (inputMarkdown) {
-  const lines = pp(inputMarkdown).split('\n')
+  const lines = inputMarkdown.split('\n')
   const frontMatter = {}
   let i = 0
   if (lines[i] === '---') {
@@ -13,7 +13,7 @@ export function extractFrontMatter (inputMarkdown) {
     }
     i++
   }
-  const markdown = pp(lines.slice(i).join('\n'))
+  const markdown = lines.slice(i).join('\n')
   return { frontMatter, markdown }
 }
 
