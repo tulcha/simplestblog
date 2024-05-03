@@ -13,16 +13,19 @@ const config = JSON.parse(await fs.readFile('content/config.json'))
 const pageMetadata = []
 for (const path of pp(await glob('content/pages/*.md'))) {
   const { frontMatter } = extractFrontMatter(await fs.readFile(path, 'utf8'))
+  frontMatter.slug = pp(path.match(/^content\/pages\/(.*)\.md$/))[1]
   pageMetadata.push(pp(frontMatter))
 }
 const postMetadata = []
 for (const path of pp(await glob('content/posts/*.md'))) {
   const { frontMatter } = extractFrontMatter(await fs.readFile(path, 'utf8'))
+  frontMatter.slug = pp(path.match(/^content\/posts\/(.*)\.md$/))[1]
   postMetadata.push(frontMatter)
 }
 const draftMetadata = []
 for (const path of await glob('content/drafts/*.md')) {
   const { frontMatter } = extractFrontMatter(path)
+  frontMatter.slug = pp(path.match(/^content\/drafts\/(.*)\.md$/))[1]
   draftMetadata.push(frontMatter)
 }
 
