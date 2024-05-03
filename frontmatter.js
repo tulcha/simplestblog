@@ -1,13 +1,13 @@
 // import { pp } from 'passprint'
 
 export function extractFrontMatter (inputMarkdown) {
-  const lines = inputMarkdown.split('\n')
+  const lines = inputMarkdown.split(/\r?\n|\r|\n/g)
   const frontMatter = {}
   let i = 0
-  if (lines[i] === '---') {
+  if (lines[i].trim() === '---') {
     i++
-    while (lines[i] !== '---') {
-      const [key, value] = lines[i].split(': ')
+    while (lines[i].trim() !== '---') {
+      const [key, value] = lines[i].trim().split(/:\s*/)
       frontMatter[key] = value
       i++
     }
