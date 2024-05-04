@@ -22,6 +22,8 @@ for (const path of await glob('content/posts/*.md')) {
   frontMatter.slug = path.match(/^content\/posts\/(.*)\.md$/)[1]
   postMetadata.push(pp(frontMatter))
 }
+postMetadata.sort((a,b) => a.created < b.created ? 1 : -1)
+
 const draftMetadata = []
 for (const path of await glob('content/drafts/*.md')) {
   const { frontMatter } = extractFrontMatter(await fs.readFile(path, 'utf8'))
