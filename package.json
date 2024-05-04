@@ -7,6 +7,7 @@
   "scripts": {
     "prestart": "node index.js",
     "start": "cd _site && live-server",
+    "demo": "rm -rf content && cp -r content-demo content && node index.js && cd _site && live-server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "fix": "standard --fix --ignore layout/js/tex-svg-full.js --ignore layout/js/equation.js"
   },
