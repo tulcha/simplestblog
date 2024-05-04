@@ -21,8 +21,6 @@
 
 <body>
     <header>
-        <h1><a rel="author" href="/" class="h-card p-author">{{author}}</a>
-        </h1>
         <nav>
             <a href="/">Home</a>
             {{#pageMetadata}}
@@ -31,7 +29,7 @@
         </nav>
     </header>
     <article>
-        <h2>{{title}}</h2><time class="dt-published" datetime="{{created}}" pubdate itemprop="datePublished"
+        <h1>{{title}}</h1><time class="dt-published" datetime="{{created}}" pubdate itemprop="datePublished"
             content="{{created}}">{{created}}</time>
         <section>{{{contentHtml}}}</section>
         </div>
