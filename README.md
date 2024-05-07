@@ -19,7 +19,11 @@ Create a blog by editing markdown files.
 ## Hosting your own blog on GitHub
 
 1. Fork this repo if you have not already done so
-2. Add content in the `content/` directory following the pattern in `content-dem0`
+2. On the repo page, click "Actions"
+3. Click the button to enable actions
+4. On the repo page, click "Settings --> Pages -> Source" and choose "GitHub Actions"
+5. Go to https://eobrain.github.io/simplestblog/ but replacing "eobrain" with your GitHub username. You should see sample content.
+7. Add content in the `content/` directory following the pattern in `content-dem0`
     1. A `config.json` file of the form:
       ```json
       {
@@ -44,6 +48,6 @@ Create a blog by editing markdown files.
     ---
     Some text
     ```
-5. From your repo GitHub page go to "Settings --> Pages --> Branch", select branch "main" and folder "/docs", and click "Save"
+8. 
 
 
